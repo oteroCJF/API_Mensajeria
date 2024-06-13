@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ionic.Zip" Version="1.9.1.8" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mensajeria.Persistence.Database\Mensajeria.Persistence.Database.csproj" />
+    <ProjectReference Include="..\Mensajeria.Service.EventHandler\Mensajeria.Service.EventHandler.csproj" />
+    <ProjectReference Include="..\Mensajeria.Service.Queries\Mensajeria.Service.Queries.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controllers\Contratos\Commands\" />
+	  <Folder Include="Controllers\Contratos\Queries\" />
+	  <Folder Include="Controllers\Convenios\Commands\" />
+	  <Folder Include="Controllers\Convenios\Queries\" />
+	  <Folder Include="Controllers\Cuestionarios\Commands\" />
+	  <Folder Include="Controllers\EntregablesContratacion\Commands\" />
+	  <Folder Include="Controllers\EntregablesContratacion\Queries\" />
+	  <Folder Include="Controllers\Firmantes\Commands\" />
+	  <Folder Include="Controllers\Firmantes\Queries\" />
+	  <Folder Include="Controllers\FlujosCedula\Commands\" />
+	  <Folder Include="Controllers\FlujosCedula\Queries\" />
+	  <Folder Include="Controllers\Historiales\Commands\" />
+	  <Folder Include="Controllers\Historiales\Queries\" />
+	  <Folder Include="Controllers\Oficios\Commands\" />
+	  <Folder Include="Controllers\Oficios\Queries\" />
+	  <Folder Include="Controllers\ServiciosContrato\Commands\" />
+	  <Folder Include="Controllers\ServiciosContrato\Queries\" />
+	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+
+</Project>
