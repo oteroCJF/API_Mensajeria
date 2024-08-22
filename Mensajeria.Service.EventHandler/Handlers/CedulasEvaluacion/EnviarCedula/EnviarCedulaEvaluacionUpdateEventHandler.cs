@@ -36,7 +36,7 @@ namespace Mensajeria.Service.EventHandler.Handlers.CedulasEvaluacion
                                                                                f.InmuebleId == cedula.InmuebleId && f.Tipo.Equals("Factura")
                                                                                && f.Facturacion.Equals("Mensual"))
                                                                    .ToList();
-
+                    
                     List<Factura> notasCredito = _context.Facturas
                                                                .Where(f => f.RepositorioId == request.RepositorioId &&
                                                                            f.InmuebleId == cedula.InmuebleId && f.Tipo.Equals("NC")
