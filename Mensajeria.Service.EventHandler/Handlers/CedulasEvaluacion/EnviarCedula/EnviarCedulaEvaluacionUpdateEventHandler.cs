@@ -55,7 +55,8 @@ namespace Mensajeria.Service.EventHandler.Handlers.CedulasEvaluacion
                     cedula.EstatusId = request.EstatusId;
                     if (calificacion < 10)
                     {
-                        string calif = calificacion.ToString().Substring(0, 3);
+                        // string calif = calificacion.ToString().Substring(0, 3);
+                        string calif = (Math.Round(calificacion, 1)).ToString();
                         cedula.Calificacion = Convert.ToDouble(calif);
                     }
                     else
@@ -63,9 +64,12 @@ namespace Mensajeria.Service.EventHandler.Handlers.CedulasEvaluacion
                         cedula.Calificacion = (double)calificacion;
                     }
 
-                    if (calificacion < Convert.ToDecimal(8))
+                    if (Convert.ToDecimal(cedula.Calificacion) < Convert.ToDecimal(8))
                     {
-                        cedula.Penalizacion = (Convert.ToDecimal(facturas.Sum(f => f.Subtotal)) * Convert.ToDecimal(0.01)) / calificacion;
+                        //cedula.Penalizacion = (Convert.ToDecimal(facturas.Sum(f => f.Subtotal)) * Convert.ToDecimal(0.01)) / calificacion;
+
+                        cedula.Penalizacion = (Convert.ToDecimal(facturas.Sum(f => f.Subtotal)) * Convert.ToDecimal(0.01)) / Convert.ToDecimal(cedula.Calificacion);
+                        cedula.Penalizacion = Math.Round(cedula.Penalizacion, 2);
                     }
                     else
                     {
@@ -229,10 +233,11 @@ namespace Mensajeria.Service.EventHandler.Handlers.CedulasEvaluacion
                 var cm = cuestionario.Single(c => c.Consecutivo == rs.Pregunta);
                 if (cm.ACLRS == rs.Respuesta && !rs.Detalles.Equals("N/A"))
                 {
-                    calidad = !calidad;
+                    calidad = false;
                     incidencias = _context.Incidencias.Where(i => i.CedulaEvaluacionId == cedula && i.Pregunta == cm.Consecutivo
                                                             && !i.FechaEliminacion.HasValue).Count();
                     
+                    //AQUI SE LLEVAN A CABO LAS MODIFICACIONES PARA PREGUNTAS INDIV DE MENSAJERÍA
                     if (cm.Formula.Contains("CTG"))
                     {
                         ponderacion = Convert.ToDecimal(incidencias) * Convert.ToDecimal(0.01);
@@ -262,7 +267,7 @@ namespace Mensajeria.Service.EventHandler.Handlers.CedulasEvaluacion
 
             calificacion = Convert.ToDecimal(calificacion / respuestas.Count());
 
-            return calidad ? calificacion + (decimal)1 : calificacion;
+             return calidad ? calificacion + (decimal)1 : calificacion;
         }
     }
 }
